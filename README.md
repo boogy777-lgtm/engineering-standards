@@ -1,73 +1,82 @@
-# 工程开发规范
+# Инженерные стандарты разработки
 
-通用的工程开发规范，做成 AI 编码代理可以直接加载的 [Agent Skills](https://agentskills.io)，也可以当文档读。规则用中文写成，都有编号和级别。
+[![Русский](https://img.shields.io/badge/Документация-Русский-2374C8?style=for-the-badge)](README.md) [![English](https://img.shields.io/badge/Documentation-English-555555?style=for-the-badge)](README.zh-CN.md) [![中文](https://img.shields.io/badge/文档-简体中文-D97706?style=for-the-badge)](README.zh-CN.md)
 
-## 安装
 
-Claude Code：
+Русский перевод документации проекта [asckye/engineering-standards](https://github.com/asckye/engineering-standards). Оригинал на китайском языке сохранён в [README.zh-CN.md](README.zh-CN.md).
+
+Универсальные правила инженерной разработки представлены в формате [Agent Skills](https://agentskills.io): их могут загружать AI-агенты, а также читать разработчики. Правила имеют идентификаторы и уровни обязательности.
+
+## Установка
+
+Для Claude Code:
 
 ```bash
 claude plugin marketplace add asckye/engineering-standards
-```
-
-```bash
 claude plugin install engineering-standards@asckye-standards
 ```
 
-其他读取 `SKILL.md` 的工具：把 `skills/` 里需要的文件夹复制到工具的 skill 目录（Codex 是 `.agents/skills/`）。最简单是复制全部 8 个文件夹，它们之间有链接，要放在同一个目录下。其他工具还没有测试过。
+Для инструментов, поддерживающих `SKILL.md`, скопируйте нужные каталоги из `skills/` в каталог навыков инструмента (для Codex — `.agents/skills/`). Рекомендуется копировать все восемь каталогов одновременно: между ними существуют ссылки. Работа в других инструментах пока не проверена автором.
 
-## 有哪些 skill
+## Доступные навыки
 
-| 项目类型 | Skill | 同时用 | 规则全文 | 状态 |
+| Область | Skill | Дополнительные стандарты | Полный текст | Статус |
 |---|---|---|---|---|
-| 所有项目 | [general-engineering-standard](skills/general-engineering-standard/SKILL.md) | | [目录](skills/general-engineering-standard/references/contents.md) | 3.0 |
-| MCP 服务 | [mcp-server-standard](skills/mcp-server-standard/SKILL.md) | 桌面的本机部分 | [概述](skills/mcp-server-standard/references/overview.md) | 草稿 0.2 |
-| 上位机 | [hmi-standard](skills/hmi-standard/SKILL.md) | 桌面 | [规则](skills/hmi-standard/references/rules.md) | 3.0 |
-| 视觉 | [machine-vision-standard](skills/machine-vision-standard/SKILL.md) | 桌面，连 PLC 或供操作员操作时加上位机 | [规则](skills/machine-vision-standard/references/rules.md) | 草稿 0.2 |
-| 大屏 | [dashboard-standard](skills/dashboard-standard/SKILL.md) | Web 或桌面 | [规则](skills/dashboard-standard/references/rules.md) | 草稿 0.2 |
-| 桌面应用 | [desktop-app-standard](skills/desktop-app-standard/SKILL.md) | | [规则](skills/desktop-app-standard/references/rules.md) | 3.0 |
-| Web | [web-app-standard](skills/web-app-standard/SKILL.md) | | [规则](skills/web-app-standard/references/rules.md) | 3.0 |
-| 移动 App | [mobile-app-standard](skills/mobile-app-standard/SKILL.md) | | [规则](skills/mobile-app-standard/references/rules.md) | 3.0 |
+| Все проекты | [general-engineering-standard](skills/general-engineering-standard/SKILL.md) | — | [Оглавление](skills/general-engineering-standard/references/contents.md) | 3.0 |
+| MCP-серверы | [mcp-server-standard](skills/mcp-server-standard/SKILL.md) | Desktop для локальной части | [Обзор](skills/mcp-server-standard/references/overview.md) | Проект 0.2 |
+| Промышленные HMI | [hmi-standard](skills/hmi-standard/SKILL.md) | Desktop | [Правила](skills/hmi-standard/references/rules.md) | 3.0 |
+| Машинное зрение | [machine-vision-standard](skills/machine-vision-standard/SKILL.md) | Desktop; HMI при работе с PLC или оператором | [Правила](skills/machine-vision-standard/references/rules.md) | Проект 0.2 |
+| Информационные панели | [dashboard-standard](skills/dashboard-standard/SKILL.md) | Web или Desktop | [Правила](skills/dashboard-standard/references/rules.md) | Проект 0.2 |
+| Настольные приложения | [desktop-app-standard](skills/desktop-app-standard/SKILL.md) | — | [Правила](skills/desktop-app-standard/references/rules.md) | 3.0 |
+| Web-приложения | [web-app-standard](skills/web-app-standard/SKILL.md) | — | [Правила](skills/web-app-standard/references/rules.md) | 3.0 |
+| Мобильные приложения | [mobile-app-standard](skills/mobile-app-standard/SKILL.md) | — | [Правила](skills/mobile-app-standard/references/rules.md) | 3.0 |
 
-所有项目都用通用规范。这些规范都还没有实测数据，也没有外部评审。
+Общий стандарт применяется ко всем проектам. Автор отмечает отсутствие экспериментальных данных об эффективности и внешней экспертизы.
 
-## 怎么起作用
+## Принцип действия
 
-代理做相关工作时加载对应的 skill。`SKILL.md` 只放最小清单和“正在做什么就读哪个文件”，规则全文在 `references/`，模板在 `assets/`，用到时才读，所以不占太多上下文。
+При выполнении задачи агент загружает соответствующий навык. `SKILL.md` содержит минимальный контрольный список и указания, какие материалы следует читать для конкретной задачи. Полные правила расположены в `references/`, шаблоны — в `assets/`. Это позволяет не загружать весь текст в контекст без необходимости.
 
-Skill 只能提醒，不能强制：代理可能没加载，也可能没照做。能自动检查的规则仍要放进项目的 CI，见[第 24 节](skills/general-engineering-standard/references/24-enforcement.md)。
+Навык не обеспечивает принудительного исполнения: агент может не загрузить его либо нарушить правило. Автоматизируемые проверки следует закреплять в CI, см. [раздел 24](skills/general-engineering-standard/references/24-enforcement.md).
 
-## 在项目中采用
+## Применение в проекте
 
-1. 读[最小必做清单](skills/general-engineering-standard/SKILL.md#minimum)、[黄金路径](skills/general-engineering-standard/references/00b-golden-path.md)、[任务手册](skills/general-engineering-standard/references/00c-playbooks.md)和[快速交付](skills/general-engineering-standard/references/00d-fast-delivery.md)。
-2. 按 [0.1](skills/general-engineering-standard/references/00-purpose.md#purpose-parts) 和 [0.2](skills/general-engineering-standard/references/00-purpose.md#purpose-tiers) 确定项目的等级（S、M、L）和项目类型，写进项目 README 的“工程规范”一行（[T.1](skills/general-engineering-standard/references/appendix/t-templates.md#tpl-readme)），代理靠这一行知道该守哪些规则。
-3. 按[第 25 节](skills/general-engineering-standard/references/25-adoption.md)建骨架、构建入口和执行机制。
-4. 想把等级、项目类型和长期偏差汇总在一处时，复制[采用记录模板](skills/general-engineering-standard/assets/project-adoption.md)。
+1. Изучите [минимальный перечень](skills/general-engineering-standard/SKILL.md#minimum), [основной маршрут](skills/general-engineering-standard/references/00b-golden-path.md), [сценарии задач](skills/general-engineering-standard/references/00c-playbooks.md) и [быструю поставку](skills/general-engineering-standard/references/00d-fast-delivery.md).
+2. По разделам 0.1 и 0.2 определите класс проекта (S, M, L) и его тип. Укажите их в README проекта в строке «Инженерные стандарты», чтобы агент мог определить применимые правила.
+3. По [разделу 25](skills/general-engineering-standard/references/25-adoption.md) создайте структуру проекта, точку входа сборки и механизм контроля соблюдения правил.
+4. Для централизованного учёта класса, типа и долговременных исключений используйте [шаблон внедрения](skills/general-engineering-standard/assets/project-adoption.md).
 
-## 版本与变更
+## Версии и изменения
 
-通用规范和各 skill 各自标明版本和状态。发布时同时改 `.claude-plugin/plugin.json` 的 `version`，已安装插件的人靠它收到更新。版本规则见 [G-07](skills/general-engineering-standard/references/00-purpose.md#purpose-gov)，变更见 [CHANGELOG.md](CHANGELOG.md)。
+Общий стандарт и специализированные навыки имеют собственные версии и статусы. При выпуске изменяется также `version` в `.claude-plugin/plugin.json`. Правила версионирования приведены в G-07, история — в [CHANGELOG.md](CHANGELOG.md).
 
-改动规范后运行 `python build-tools/check_standards.py`，它核对内部链接、规则编号、理由行、第 24 节、版本号、模板里的清单、skill 的基本格式和插件名称，并确认已发布的 MUST 没有被降级、删除或缩小等级范围。检查脚本的测试：`python -m unittest discover -s build-tools`。
+После изменения стандартов выполните:
 
-`evals/` 里是 skill 的测试用例，用 Claude Code 运行（需要先登录），结果写到 `evals/results/`：
+```bash
+python build-tools/check_standards.py
+python -m unittest discover -s build-tools
+```
+
+Проверяются внутренние ссылки, идентификаторы правил, обоснования, раздел 24, версии, контрольные списки, формат навыков и имя плагина. Для опубликованных правил MUST дополнительно контролируется отсутствие снижения обязательности, удаления или сужения области применения.
+
+В `evals/` находятся задания для оценки навыков с помощью Claude Code (требуется вход в учётную запись). Результаты сохраняются в `evals/results/`:
 
 ```bash
 claude plugin eval . --allow-tools Write --no-publish
 ```
 
-## 路线图
+## План развития
 
-- 通用规范下一版（计划中）：加入实测数据和按项目规模选用的清单。
-- MCP 规范：用一个新项目从零试用，再定 1.0。
-- 视觉、大屏：各用一个新项目试用，按结果调整规则和级别，再定 1.0。
+- Общий стандарт: экспериментальные результаты и контрольные списки по масштабу проекта.
+- MCP-стандарт: применение в новом проекте перед выпуском 1.0.
+- Машинное зрение и информационные панели: испытания в новых проектах, корректировка правил и уровней перед выпуском 1.0.
 
-## 反馈
+## Обратная связь
 
-问题和建议请提 [GitHub Issue](https://github.com/asckye/engineering-standards/issues)。
+Вопросы и предложения: [GitHub Issues исходного проекта](https://github.com/asckye/engineering-standards/issues).
 
-## 许可
+## Лицензия и атрибуция
 
-Copyright © 2026 asckye。本仓库的文档、skill 和测试用例以 [CC BY 4.0](LICENSE) 授权，`build-tools/` 里的脚本以 [MIT 许可证](build-tools/LICENSE)授权。
+Copyright © 2026 asckye. Документация, навыки и тестовые задания распространяются по [CC BY 4.0](LICENSE), сценарии в `build-tools/` — по [MIT](build-tools/LICENSE).
 
-引用或改编时请注明：《工程开发规范》，asckye，CC BY 4.0，并附仓库链接；改动过的内容要说明。
+Основание перевода: «工程开发规范», asckye, [исходный репозиторий](https://github.com/asckye/engineering-standards), CC BY 4.0. Изменение: перевод README на русский язык. Перевод не изменяет обязательность правил и не заменяет оригинал.
