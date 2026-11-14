@@ -1,6 +1,6 @@
 # Инженерные стандарты разработки
 
-[![Русский](https://img.shields.io/badge/Документация-Русский-2374C8?style=for-the-badge)](README.md) [![English](https://img.shields.io/badge/Documentation-English-555555?style=for-the-badge)](README.zh-CN.md) [![中文](https://img.shields.io/badge/文档-简体中文-D97706?style=for-the-badge)](README.zh-CN.md)
+[![Русский](https://img.shields.io/badge/Документация-Русский-2374C8?style=for-the-badge)](README.md) [![English](https://img.shields.io/badge/Documentation-English-555555?style=for-the-badge)](README.en.md) [![中文](https://img.shields.io/badge/文档-简体中文-D97706?style=for-the-badge)](README.zh-CN.md)
 
 
 Русский перевод документации проекта [asckye/engineering-standards](https://github.com/asckye/engineering-standards). Оригинал на китайском языке сохранён в [README.zh-CN.md](README.zh-CN.md).
